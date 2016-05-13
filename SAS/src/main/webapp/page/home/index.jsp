@@ -1,9 +1,13 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 String resourcePath = basePath+"page/home/";
 %>
+
 <!DOCTYPE html>
 <html lang="en" class="app">
 <head>  
@@ -26,14 +30,15 @@ String resourcePath = basePath+"page/home/";
 </head>
 <body class="">
   <section class="vbox">
+  
+  	<!-- 头部 -->
     <header class="bg-white-only header header-md navbar navbar-fixed-top-xs">
       <div class="navbar-header aside bg-info nav-xs">
         <a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen,open" data-target="#nav,html">
           <i class="icon-list"></i>
         </a>
-        <a href="index.html" class="navbar-brand text-lt">
-          <i class="icon-earphones"></i>
-          <img src="<%=resourcePath %>images/logo.png" alt="." class="hide">
+        <a href="<%=resourcePath %>index.jsp" class="navbar-brand text-lt">
+          <img src="<%=resourcePath %>images/logo.png" alt=".">
           <span class="hidden-nav-xs m-l-sm">Dreams</span>
         </a>
         <a class="btn btn-link visible-xs" data-toggle="dropdown" data-target=".user">
@@ -53,12 +58,13 @@ String resourcePath = basePath+"page/home/";
             <span class="input-group-btn">
               <button type="submit" class="btn btn-sm bg-white btn-icon rounded"><i class="fa fa-search"></i></button>
             </span>
-            <input type="text" class="form-control input-sm no-border rounded" placeholder="Search songs, albums...">
+            <input type="text" class="form-control input-sm no-border rounded" placeholder="大家正在搜：北京房价">
           </div>
         </div>
       </form>
       <div class="navbar-right ">
         <ul class="nav navbar-nav m-n hidden-xs nav-user user">
+        <c:if test="${sessionUser.id }">
           <li class="hidden-xs">
             <a href="#" class="dropdown-toggle lt" data-toggle="dropdown">
               <i class="icon-bell"></i>
@@ -75,20 +81,20 @@ String resourcePath = basePath+"page/home/";
                       <img src="<%=resourcePath %>images/a0.png" alt="..." class="img-circle">
                     </span>
                     <span class="media-body block m-b-none">
-                      Use awesome animate.css<br>
-                      <small class="text-muted">10 minutes ago</small>
+                      	库克请求添加您为好友<br>
+                      <small class="text-muted">10 分钟前</small>
                     </span>
                   </a>
                   <a href="#" class="media list-group-item">
                     <span class="media-body block m-b-none">
-                      1.0 initial released<br>
-                      <small class="text-muted">1 hour ago</small>
+                      	扎克伯格给您发了一条私信<br>
+                      <small class="text-muted">1 小时前</small>
                     </span>
                   </a>
                 </div>
                 <div class="panel-footer text-sm">
                   <a href="#" class="pull-right"><i class="fa fa-cog"></i></a>
-                  <a href="#notes" data-toggle="class:show animated fadeInRight">See all the notifications</a>
+                  <a href="#notes" data-toggle="class:show animated fadeInRight">查看所有通知</a>
                 </div>
               </section>
             </section>
@@ -110,7 +116,7 @@ String resourcePath = basePath+"page/home/";
               </li>
               <li>
                 <a href="#">
-                  <span class="badge bg-danger pull-right">3</span>
+                  <span class="badge bg-danger pull-right">2</span>
                   	通知
                 </a>
               </li>
@@ -123,19 +129,22 @@ String resourcePath = basePath+"page/home/";
               </li>
             </ul>
           </li>
+          </c:if>
         </ul>
       </div>      
     </header>
+    
+    <!-- Center -->
     <section>
       <section class="hbox stretch">
         <!-- .aside -->
         <aside class="bg-black dk nav-xs aside hidden-print" id="nav">          
           <section class="vbox">
-            <section class="w-f-md scrollable">
+          	<!-- 左侧工具栏 -->
+          	<%-- <section class="w-f-md scrollable">--%>
+            <section class="scrollable">
               <div class="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="10px" data-railOpacity="0.2">
                 
-
-
                 <!-- nav -->                 
                 <nav class="nav-primary hidden-xs">
                   <ul class="nav bg clearfix">
@@ -448,6 +457,8 @@ String resourcePath = basePath+"page/home/";
               </div>
             </section>
             
+            <!-- 左侧下脚处的音乐头像 -->
+            <%--
             <footer class="footer hidden-xs no-padder text-center-nav-xs">
               <div class="bg hidden-xs ">
                   <div class="dropdown dropup wrapper-sm clearfix">
@@ -487,23 +498,29 @@ String resourcePath = basePath+"page/home/";
                       </li>
                     </ul>
                   </div>
-                </div>            </footer>
+                </div>
+             </footer>
+              --%>
           </section>
         </aside>
         <!-- /.aside -->
+        <!-- Center 内容 -->
         <section id="content">
           <section class="hbox stretch">
             <section>
               <section class="vbox">
-                <section class="scrollable padder-lg w-f-md" id="bjax-target">
+                <%-- <section class="scrollable padder-lg w-f-md" id="bjax-target"> --%>
+                <section class="scrollable padder-lg" id="bjax-target">
                   <a href="#" class="pull-right text-muted m-t-lg" data-toggle="class:fa-spin" ><i class="icon-refresh i-lg  inline" id="refresh"></i></a>
-                  <h2 class="font-thin m-b">Discover <span class="musicbar animate inline m-l-sm" style="width:20px;height:20px">
-                    <span class="bar1 a1 bg-primary lter"></span>
-                    <span class="bar2 a2 bg-info lt"></span>
-                    <span class="bar3 a3 bg-success"></span>
-                    <span class="bar4 a4 bg-warning dk"></span>
-                    <span class="bar5 a5 bg-danger dker"></span>
-                  </span></h2>
+                  <h4 class="font-thin m-b">热门 
+                  	<span class="musicbar animate inline m-l-sm" style="width:20px;height:20px">
+	                    <span class="bar1 a1 bg-primary lter"></span>
+	                    <span class="bar2 a2 bg-info lt"></span>
+	                    <span class="bar3 a3 bg-success"></span>
+	                    <span class="bar4 a4 bg-warning dk"></span>
+	                    <span class="bar5 a5 bg-danger dker"></span>
+                  	</span>
+                  </h4>
                   <div class="row row-sm">
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                       <div class="item">
@@ -907,9 +924,11 @@ String resourcePath = basePath+"page/home/";
                       </div>
                     </div>
                   </div>
+                  
+                  
                   <div class="row">
                     <div class="col-md-7">
-                      <h3 class="font-thin">New Songs</h3>
+                      <h4 class="font-thin">新鲜事</h4>
                       <div class="row row-sm">
                         <div class="col-xs-6 col-sm-3">
                           <div class="item">
@@ -1042,7 +1061,7 @@ String resourcePath = basePath+"page/home/";
                       </div>
                     </div>
                     <div class="col-md-5">
-                      <h3 class="font-thin">Top Songs</h3>
+                      <h4 class="font-thin">事件</h4>
                       <div class="list-group bg-white list-group-lg no-bg auto">                          
                         <a href="#" class="list-group-item clearfix">
                           <span class="pull-right h2 text-muted m-l">1</span>
@@ -1097,6 +1116,9 @@ String resourcePath = basePath+"page/home/";
                       </div>
                     </div>
                   </div>
+                  
+                  <!-- 底部登陆和下载app模块 -->
+                  <%--
                   <div class="row m-t-lg m-b-lg">
                     <div class="col-sm-6">
                       <div class="bg-primary wrapper-md r">
@@ -1115,7 +1137,12 @@ String resourcePath = basePath+"page/home/";
                       </div>
                     </div>
                   </div>
+                   --%>
+                  
                 </section>
+                
+                <!-- 底部音乐播放器 -->
+                <%--
                 <footer class="footer bg-dark">
                   <div id="jp_container_N">
                     <div class="jp-type-playlist">
@@ -1184,13 +1211,16 @@ String resourcePath = basePath+"page/home/";
                     </div>
                   </div>
                 </footer>
+                 --%>
+                
               </section>
             </section>
             <!-- side content -->
             <aside class="aside-md bg-light dk" id="sidebar">
               <section class="vbox animated fadeInRight">
-                <section class="w-f-md scrollable hover">
-                  <h4 class="font-thin m-l-md m-t">Connected</h4>
+              	<%-- <section class="w-f-md scrollable hover"> --%>
+                <section class="scrollable hover">
+                  <h4 class="font-thin m-l-md m-t">最新动态</h4>
                   <ul class="list-group no-bg no-borders auto m-t-n-xxs">
                     <li class="list-group-item">
                       <span class="pull-left thumb-xs m-t-xs avatar m-l-xs m-r-sm">
@@ -1314,6 +1344,9 @@ String resourcePath = basePath+"page/home/";
                     </li>
                   </ul>
                 </section>
+                
+                <!-- 右侧下脚的搜索 -->
+                <%--
                 <footer class="footer footer-md bg-black">
                   <form class="" role="search">
                     <div class="form-group clearfix m-b-none">
@@ -1326,6 +1359,7 @@ String resourcePath = basePath+"page/home/";
                     </div>
                   </form>
                 </footer>
+               --%>
               </section>              
             </aside>
             <!-- / side content -->
@@ -1341,10 +1375,11 @@ String resourcePath = basePath+"page/home/";
   <!-- App -->
   <script src="<%=resourcePath %>js/app.js"></script>  
   <script src="<%=resourcePath %>js/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="js/app.plugin.js"></script>
+  <script src="js/app.plugin.js"></script>
+  <%-- 
   <script type="text/javascript" src="<%=resourcePath %>js/jPlayer/jquery.jplayer.min.js"></script>
   <script type="text/javascript" src="<%=resourcePath %>js/jPlayer/add-on/jplayer.playlist.min.js"></script>
   <script type="text/javascript" src="<%=resourcePath %>js/jPlayer/demo.js"></script>
-
+	--%>
 </body>
 </html>

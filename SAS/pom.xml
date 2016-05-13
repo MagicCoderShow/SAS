@@ -156,6 +156,12 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
+		<!-- guava工具 -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>17.0</version>
+		</dependency>
 		<!-- 文件上传 -->
 		<dependency>
 			<groupId>commons-io</groupId>
