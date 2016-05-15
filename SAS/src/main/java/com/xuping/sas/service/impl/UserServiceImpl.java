@@ -76,4 +76,12 @@ public class UserServiceImpl implements UserService {
 		return userMapper.updateByPrimaryKey(record);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.xuping.sas.service.UserService#selectByLoginName(java.lang.String)
+	 */
+	@Override
+	public User selectByLoginName(String loginname) {
+		return userMapper.selectByLoginName(loginname);
+	}
+
 }

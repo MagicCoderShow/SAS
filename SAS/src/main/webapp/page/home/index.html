@@ -1,46 +1,34 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-String resourcePath = basePath+"page/home/";
-%>
-
 <!DOCTYPE html>
 <html lang="en" class="app">
 <head>  
   <meta charset="utf-8" />
-  <title>We Have Dreams</title>
+  <title>Musik | Web Application</title>
   <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <link rel="stylesheet" href="<%=resourcePath %>js/jPlayer/jplayer.flat.css" type="text/css" />
-  <link rel="stylesheet" href="<%=resourcePath %>css/bootstrap.css" type="text/css" />
-  <link rel="stylesheet" href="<%=resourcePath %>css/animate.css" type="text/css" />
-  <link rel="stylesheet" href="<%=resourcePath %>css/font-awesome.min.css" type="text/css" />
-  <link rel="stylesheet" href="<%=resourcePath %>css/simple-line-icons.css" type="text/css" />
-  <link rel="stylesheet" href="<%=resourcePath %>css/font.css" type="text/css" />
-  <link rel="stylesheet" href="<%=resourcePath %>css/app.css" type="text/css" />
-  <link rel="stylesheet" href="<%=resourcePath %>css/index.css" type="text/css" />    
+  <link rel="stylesheet" href="js/jPlayer/jplayer.flat.css" type="text/css" />
+  <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
+  <link rel="stylesheet" href="css/animate.css" type="text/css" />
+  <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="css/simple-line-icons.css" type="text/css" />
+  <link rel="stylesheet" href="css/font.css" type="text/css" />
+  <link rel="stylesheet" href="css/app.css" type="text/css" />  
     <!--[if lt IE 9]>
-    <script src="<%=resourcePath %>js/ie/html5shiv.js"></script>
-    <script src="<%=resourcePath %>js/ie/respond.min.js"></script>
-    <script src="<%=resourcePath %>js/ie/excanvas.js"></script>
+    <script src="js/ie/html5shiv.js"></script>
+    <script src="js/ie/respond.min.js"></script>
+    <script src="js/ie/excanvas.js"></script>
   <![endif]-->
 </head>
 <body class="">
   <section class="vbox">
-  
-  	<!-- 头部 -->
     <header class="bg-white-only header header-md navbar navbar-fixed-top-xs">
       <div class="navbar-header aside bg-info nav-xs">
         <a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen,open" data-target="#nav,html">
           <i class="icon-list"></i>
         </a>
-        <a href="<%=resourcePath %>index.jsp" class="navbar-brand text-lt">
-          <img src="<%=resourcePath %>images/logo.png" alt=".">
-          <span class="hidden-nav-xs m-l-sm">Dreams</span>
+        <a href="index.html" class="navbar-brand text-lt">
+          <i class="icon-earphones"></i>
+          <img src="images/logo.png" alt="." class="hide">
+          <span class="hidden-nav-xs m-l-sm">Musik</span>
         </a>
         <a class="btn btn-link visible-xs" data-toggle="dropdown" data-target=".user">
           <i class="icon-settings"></i>
@@ -59,13 +47,12 @@ String resourcePath = basePath+"page/home/";
             <span class="input-group-btn">
               <button type="submit" class="btn btn-sm bg-white btn-icon rounded"><i class="fa fa-search"></i></button>
             </span>
-            <input type="text" class="form-control input-sm no-border rounded" placeholder="大家正在搜：北京房价">
+            <input type="text" class="form-control input-sm no-border rounded" placeholder="Search songs, albums...">
           </div>
         </div>
       </form>
       <div class="navbar-right ">
         <ul class="nav navbar-nav m-n hidden-xs nav-user user">
-        <c:if test="${sessionUser.id }">
           <li class="hidden-xs">
             <a href="#" class="dropdown-toggle lt" data-toggle="dropdown">
               <i class="icon-bell"></i>
@@ -74,28 +61,28 @@ String resourcePath = basePath+"page/home/";
             <section class="dropdown-menu aside-xl animated fadeInUp">
               <section class="panel bg-white">
                 <div class="panel-heading b-light bg-light">
-                  <strong>您有 <span class="count">2</span> 条新消息</strong>
+                  <strong>You have <span class="count">2</span> notifications</strong>
                 </div>
                 <div class="list-group list-group-alt">
                   <a href="#" class="media list-group-item">
                     <span class="pull-left thumb-sm">
-                      <img src="<%=resourcePath %>images/a0.png" alt="..." class="img-circle">
+                      <img src="images/a0.png" alt="..." class="img-circle">
                     </span>
                     <span class="media-body block m-b-none">
-                      	库克请求添加您为好友<br>
-                      <small class="text-muted">10 分钟前</small>
+                      Use awesome animate.css<br>
+                      <small class="text-muted">10 minutes ago</small>
                     </span>
                   </a>
                   <a href="#" class="media list-group-item">
                     <span class="media-body block m-b-none">
-                      	扎克伯格给您发了一条私信<br>
-                      <small class="text-muted">1 小时前</small>
+                      1.0 initial released<br>
+                      <small class="text-muted">1 hour ago</small>
                     </span>
                   </a>
                 </div>
                 <div class="panel-footer text-sm">
                   <a href="#" class="pull-right"><i class="fa fa-cog"></i></a>
-                  <a href="#notes" data-toggle="class:show animated fadeInRight">查看所有通知</a>
+                  <a href="#notes" data-toggle="class:show animated fadeInRight">See all the notifications</a>
                 </div>
               </section>
             </section>
@@ -103,97 +90,88 @@ String resourcePath = basePath+"page/home/";
           <li class="dropdown">
             <a href="#" class="dropdown-toggle bg clear" data-toggle="dropdown">
               <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
-                <img src="<%=resourcePath %>images/a0.png" alt="...">
+                <img src="images/a0.png" alt="...">
               </span>
-              admin <b class="caret"></b>
+              John.Smith <b class="caret"></b>
             </a>
             <ul class="dropdown-menu animated fadeInRight">            
               <li>
                 <span class="arrow top"></span>
-                <a href="#">设置</a>
+                <a href="#">Settings</a>
               </li>
               <li>
                 <a href="profile.html">Profile</a>
               </li>
               <li>
                 <a href="#">
-                  <span class="badge bg-danger pull-right">2</span>
-                  	通知
+                  <span class="badge bg-danger pull-right">3</span>
+                  Notifications
                 </a>
               </li>
               <li>
-                <a href="docs.html">帮助</a>
+                <a href="docs.html">Help</a>
               </li>
               <li class="divider"></li>
               <li>
-                <a href="modal.lockme.html" data-toggle="ajaxModal" >退出</a>
+                <a href="modal.lockme.html" data-toggle="ajaxModal" >Logout</a>
               </li>
             </ul>
           </li>
-          </c:if>
-          <c:if test="${!sessionUser.id }">
-          	<div class="index-doc-buttons">
-	          	<a class="btn btn-s-md btn-lg btn-success" href="<%=resourcePath %>/signin.jsp">登录</a>
-				<a class="btn btn-s-md btn-lg btn-info" href="<%=resourcePath %>/signup.jsp">注册</a>
-			</div>
-          </c:if>
         </ul>
       </div>      
     </header>
-    
-    <!-- Center -->
     <section>
       <section class="hbox stretch">
         <!-- .aside -->
         <aside class="bg-black dk nav-xs aside hidden-print" id="nav">          
           <section class="vbox">
-          	<!-- 左侧工具栏 -->
-          	<%-- <section class="w-f-md scrollable">--%>
-            <section class="scrollable">
+            <section class="w-f-md scrollable">
               <div class="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="10px" data-railOpacity="0.2">
                 
+
+
                 <!-- nav -->                 
                 <nav class="nav-primary hidden-xs">
                   <ul class="nav bg clearfix">
                     <li class="hidden-nav-xs padder m-t m-b-sm text-xs text-muted">
-                      	发现
+                      Discover
                     </li>
                     <li>
                       <a href="index.html">
                         <i class="icon-disc icon text-success"></i>
-                        <span class="font-bold">新鲜事</span>
+                        <span class="font-bold">What's new</span>
                       </a>
                     </li>
                     <li>
                       <a href="genres.html">
                         <i class="icon-music-tone-alt icon text-info"></i>
-                        <span class="font-bold">风格</span>
+                        <span class="font-bold">Genres</span>
                       </a>
                     </li>
                     <li>
                       <a href="events.html">
                         <i class="icon-drawer icon text-primary-lter"></i>
                         <b class="badge bg-primary pull-right">6</b>
-                        <span class="font-bold">事件</span>
+                        <span class="font-bold">Events</span>
                       </a>
                     </li>
                     <li>
                       <a href="listen.html">
                         <i class="icon-list icon  text-info-dker"></i>
-                        <span class="font-bold">倾听</span>
+                        <span class="font-bold">Listen</span>
                       </a>
                     </li>
                     <li>
                       <a href="video.html" data-target="#content" data-el="#bjax-el" data-replace="true">
                         <i class="icon-social-youtube icon  text-primary"></i>
-                        <span class="font-bold">视频</span>
+                        <span class="font-bold">Video</span>
                       </a>
                     </li>
                     <li class="m-b hidden-nav-xs"></li>
                   </ul>
                   <ul class="nav" data-ride="collapse">
                     <li class="hidden-nav-xs padder m-t m-b-sm text-xs text-muted">
-                      	界面
+                      Interface
                     </li>
                     <li >
                       <a href="#" class="auto">
@@ -203,7 +181,7 @@ String resourcePath = basePath+"page/home/";
                         </span>
                         <i class="icon-screen-desktop icon">
                         </i>
-                        <span>布局</span>
+                        <span>Layouts</span>
                       </a>
                       <ul class="nav dk text-sm">
                         <li >
@@ -237,7 +215,7 @@ String resourcePath = basePath+"page/home/";
                         </span>
                         <i class="icon-chemistry icon">
                         </i>
-                        <span>UI 组件</span>
+                        <span>UI Kit</span>
                       </a>
                       <ul class="nav dk text-sm">
                         <li >
@@ -378,7 +356,7 @@ String resourcePath = basePath+"page/home/";
                         </span>
                         <i class="icon-grid icon">
                         </i>
-                        <span>页面</span>
+                        <span>Pages</span>
                       </a>
                       <ul class="nav dk text-sm">
                         <li >
@@ -464,14 +442,12 @@ String resourcePath = basePath+"page/home/";
               </div>
             </section>
             
-            <!-- 左侧下脚处的音乐头像 -->
-            <%--
             <footer class="footer hidden-xs no-padder text-center-nav-xs">
               <div class="bg hidden-xs ">
                   <div class="dropdown dropup wrapper-sm clearfix">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                       <span class="thumb-sm avatar pull-left m-l-xs">                        
-                        <img src="<%=resourcePath %>images/a3.png" class="dker" alt="...">
+                        <img src="images/a3.png" class="dker" alt="...">
                         <i class="on b-black"></i>
                       </span>
                       <span class="hidden-nav-xs clear">
@@ -505,29 +481,23 @@ String resourcePath = basePath+"page/home/";
                       </li>
                     </ul>
                   </div>
-                </div>
-             </footer>
-              --%>
+                </div>            </footer>
           </section>
         </aside>
         <!-- /.aside -->
-        <!-- Center 内容 -->
         <section id="content">
           <section class="hbox stretch">
             <section>
               <section class="vbox">
-                <%-- <section class="scrollable padder-lg w-f-md" id="bjax-target"> --%>
-                <section class="scrollable padder-lg" id="bjax-target">
+                <section class="scrollable padder-lg w-f-md" id="bjax-target">
                   <a href="#" class="pull-right text-muted m-t-lg" data-toggle="class:fa-spin" ><i class="icon-refresh i-lg  inline" id="refresh"></i></a>
-                  <h4 class="font-thin m-b">热门 
-                  	<span class="musicbar animate inline m-l-sm" style="width:20px;height:20px">
-	                    <span class="bar1 a1 bg-primary lter"></span>
-	                    <span class="bar2 a2 bg-info lt"></span>
-	                    <span class="bar3 a3 bg-success"></span>
-	                    <span class="bar4 a4 bg-warning dk"></span>
-	                    <span class="bar5 a5 bg-danger dker"></span>
-                  	</span>
-                  </h4>
+                  <h2 class="font-thin m-b">Discover <span class="musicbar animate inline m-l-sm" style="width:20px;height:20px">
+                    <span class="bar1 a1 bg-primary lter"></span>
+                    <span class="bar2 a2 bg-info lt"></span>
+                    <span class="bar3 a3 bg-success"></span>
+                    <span class="bar4 a4 bg-warning dk"></span>
+                    <span class="bar5 a5 bg-danger dker"></span>
+                  </span></h2>
                   <div class="row row-sm">
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                       <div class="item">
@@ -555,7 +525,7 @@ String resourcePath = basePath+"page/home/";
                               </a>
                             </div>
                           </div>
-                          <a href="#"><img src="<%=resourcePath %>images/p1.jpg" alt="" class="r r-2x img-full"></a>
+                          <a href="#"><img src="images/p1.jpg" alt="" class="r r-2x img-full"></a>
                         </div>
                         <div class="padder-v">
                           <a href="#" class="text-ellipsis">Tempered Song</a>
@@ -591,7 +561,7 @@ String resourcePath = basePath+"page/home/";
                               </a>
                             </div>
                           </div>
-                          <a href="#"><img src="<%=resourcePath %>images/p2.jpg" alt="" class="r r-2x img-full"></a>
+                          <a href="#"><img src="images/p2.jpg" alt="" class="r r-2x img-full"></a>
                         </div>
                         <div class="padder-v">
                           <a href="#" class="text-ellipsis">Vivamus vel tincidunt libero</a>
@@ -623,7 +593,7 @@ String resourcePath = basePath+"page/home/";
                               </a>
                             </div>
                           </div>
-                          <a href="#"><img src="<%=resourcePath %>images/p3.jpg" alt="" class="r r-2x img-full"></a>
+                          <a href="#"><img src="images/p3.jpg" alt="" class="r r-2x img-full"></a>
                         </div>
                         <div class="padder-v">
                           <a href="#" class="text-ellipsis">Morbi id neque quam liquam sollicitudin</a>
@@ -659,7 +629,7 @@ String resourcePath = basePath+"page/home/";
                               <i class="fa fa-bookmark i-lg"></i>
                             </span>
                           </div>
-                          <a href="#"><img src="<%=resourcePath %>images/p4.jpg" alt="" class="r r-2x img-full"></a>
+                          <a href="#"><img src="images/p4.jpg" alt="" class="r r-2x img-full"></a>
                         </div>
                         <div class="padder-v">
                           <a href="#" class="text-ellipsis">Tincidunt libero</a>
@@ -691,7 +661,7 @@ String resourcePath = basePath+"page/home/";
                               </a>
                             </div>
                           </div>
-                          <a href="#"><img src="<%=resourcePath %>images/p5.jpg" alt="" class="r r-2x img-full"></a>
+                          <a href="#"><img src="images/p5.jpg" alt="" class="r r-2x img-full"></a>
                         </div>
                         <div class="padder-v">
                           <a href="#" class="text-ellipsis">Fermentum diam</a>
@@ -725,7 +695,7 @@ String resourcePath = basePath+"page/home/";
                               </a>
                             </div>
                           </div>                          
-                          <a href="#"><img src="<%=resourcePath %>images/p6.jpg" alt="" class="r r-2x img-full"></a>
+                          <a href="#"><img src="images/p6.jpg" alt="" class="r r-2x img-full"></a>
                         </div>
                         <div class="padder-v">
                           <a href="#" class="text-ellipsis">Habitant</a>
@@ -760,7 +730,7 @@ String resourcePath = basePath+"page/home/";
                           <div class="top">
                             <span class="pull-right m-t-sm m-r-sm badge bg-white">12</span>
                           </div>
-                          <a href="#"><img src="<%=resourcePath %>images/p7.jpg" alt="" class="r r-2x img-full"></a>
+                          <a href="#"><img src="images/p7.jpg" alt="" class="r r-2x img-full"></a>
                         </div>
                         <div class="padder-v">
                           <a href="#" class="text-ellipsis">Vivamus vel tincidunt libero</a>
@@ -791,7 +761,7 @@ String resourcePath = basePath+"page/home/";
                               </a>
                             </div>
                           </div>
-                          <a href="#"><img src="<%=resourcePath %>images/p8.jpg" alt="" class="r r-2x img-full"></a>
+                          <a href="#"><img src="images/p8.jpg" alt="" class="r r-2x img-full"></a>
                         </div>
                         <div class="padder-v">
                           <a href="#" class="text-ellipsis">Aliquam sollicitudin venenati</a>
@@ -823,7 +793,7 @@ String resourcePath = basePath+"page/home/";
                               </a>
                             </div>
                           </div>
-                          <a href="#"><img src="<%=resourcePath %>images/p9.jpg" alt="" class="r r-2x img-full"></a>
+                          <a href="#"><img src="images/p9.jpg" alt="" class="r r-2x img-full"></a>
                         </div>
                         <div class="padder-v">
                           <a href="#" class="text-ellipsis">Lementum ligula vitae</a>
@@ -859,7 +829,7 @@ String resourcePath = basePath+"page/home/";
                               </a>
                             </div>
                           </div>
-                          <a href="#"><img src="<%=resourcePath %>images/p10.jpg" alt="" class="r r-2x img-full"></a>
+                          <a href="#"><img src="images/p10.jpg" alt="" class="r r-2x img-full"></a>
                         </div>
                         <div class="padder-v">
                           <a href="#" class="text-ellipsis">Egestas dui nec fermentum </a>
@@ -891,7 +861,7 @@ String resourcePath = basePath+"page/home/";
                               </a>
                             </div>
                           </div>
-                          <a href="#"><img src="<%=resourcePath %>images/p11.jpg" alt="" class="r r-2x img-full"></a>
+                          <a href="#"><img src="images/p11.jpg" alt="" class="r r-2x img-full"></a>
                         </div>
                         <div class="padder-v">
                           <a href="#" class="text-ellipsis">Aliquam sollicitudin venenatis ipsum</a>
@@ -922,7 +892,7 @@ String resourcePath = basePath+"page/home/";
                               </a>
                             </div>
                           </div>
-                          <a href="#"><img src="<%=resourcePath %>images/p12.jpg" alt="" class="r r-2x img-full"></a>
+                          <a href="#"><img src="images/p12.jpg" alt="" class="r r-2x img-full"></a>
                         </div>
                         <div class="padder-v">
                           <a href="#" class="text-ellipsis">Vestibulum ullamcorper</a>
@@ -931,11 +901,9 @@ String resourcePath = basePath+"page/home/";
                       </div>
                     </div>
                   </div>
-                  
-                  
                   <div class="row">
                     <div class="col-md-7">
-                      <h4 class="font-thin">新鲜事</h4>
+                      <h3 class="font-thin">New Songs</h3>
                       <div class="row row-sm">
                         <div class="col-xs-6 col-sm-3">
                           <div class="item">
@@ -945,7 +913,7 @@ String resourcePath = basePath+"page/home/";
                                   <a href="#"><i class="fa fa-play-circle i-2x"></i></a>
                                 </div>
                               </div>
-                              <a href="#"><img src="<%=resourcePath %>images/a2.png" alt="" class="r r-2x img-full"></a>
+                              <a href="#"><img src="images/a2.png" alt="" class="r r-2x img-full"></a>
                             </div>
                             <div class="padder-v">
                               <a href="#" class="text-ellipsis">Spring rain</a>
@@ -961,7 +929,7 @@ String resourcePath = basePath+"page/home/";
                                   <a href="#"><i class="fa fa-play-circle i-2x"></i></a>
                                 </div>
                               </div>
-                              <a href="#"><img src="<%=resourcePath %>images/a3.png" alt="" class="r r-2x img-full"></a>
+                              <a href="#"><img src="images/a3.png" alt="" class="r r-2x img-full"></a>
                             </div>
                             <div class="padder-v">
                               <a href="#" class="text-ellipsis">Hope</a>
@@ -977,7 +945,7 @@ String resourcePath = basePath+"page/home/";
                                   <a href="#"><i class="fa fa-play-circle i-2x"></i></a>
                                 </div>
                               </div>
-                              <a href="#"><img src="<%=resourcePath %>images/a8.png" alt="" class="r r-2x img-full"></a>
+                              <a href="#"><img src="images/a8.png" alt="" class="r r-2x img-full"></a>
                             </div>
                             <div class="padder-v">
                               <a href="#" class="text-ellipsis">Listen wind</a>
@@ -993,7 +961,7 @@ String resourcePath = basePath+"page/home/";
                                   <a href="#"><i class="fa fa-play-circle i-2x"></i></a>
                                 </div>
                               </div>
-                              <a href="#"><img src="<%=resourcePath %>images/a9.png" alt="" class="r r-2x img-full"></a>
+                              <a href="#"><img src="images/a9.png" alt="" class="r r-2x img-full"></a>
                             </div>
                             <div class="padder-v">
                               <a href="#" class="text-ellipsis">Breaking me</a>
@@ -1009,7 +977,7 @@ String resourcePath = basePath+"page/home/";
                                   <a href="#"><i class="fa fa-play-circle i-2x"></i></a>
                                 </div>
                               </div>
-                              <a href="#"><img src="<%=resourcePath %>images/a1.png" alt="" class="r r-2x img-full"></a>
+                              <a href="#"><img src="images/a1.png" alt="" class="r r-2x img-full"></a>
                             </div>
                             <div class="padder-v">
                               <a href="#" class="text-ellipsis">Nothing</a>
@@ -1025,7 +993,7 @@ String resourcePath = basePath+"page/home/";
                                   <a href="#"><i class="fa fa-play-circle i-2x"></i></a>
                                 </div>
                               </div>
-                              <a href="#"><img src="<%=resourcePath %>images/a6.png" alt="" class="r r-2x img-full"></a>
+                              <a href="#"><img src="images/a6.png" alt="" class="r r-2x img-full"></a>
                             </div>
                             <div class="padder-v">
                               <a href="#" class="text-ellipsis">Panda Style</a>
@@ -1041,7 +1009,7 @@ String resourcePath = basePath+"page/home/";
                                   <a href="#"><i class="fa fa-play-circle i-2x"></i></a>
                                 </div>
                               </div>
-                              <a href="#"><img src="<%=resourcePath %>images/a7.png" alt="" class="r r-2x img-full"></a>
+                              <a href="#"><img src="images/a7.png" alt="" class="r r-2x img-full"></a>
                             </div>
                             <div class="padder-v">
                               <a href="#" class="text-ellipsis">Hook Me</a>
@@ -1057,7 +1025,7 @@ String resourcePath = basePath+"page/home/";
                                   <a href="#"><i class="fa fa-play-circle i-2x"></i></a>
                                 </div>
                               </div>
-                              <a href="#"><img src="<%=resourcePath %>images/a5.png" alt="" class="r r-2x img-full"></a>
+                              <a href="#"><img src="images/a5.png" alt="" class="r r-2x img-full"></a>
                             </div>
                             <div class="padder-v">
                               <a href="#" class="text-ellipsis">Tempered Song</a>
@@ -1068,12 +1036,12 @@ String resourcePath = basePath+"page/home/";
                       </div>
                     </div>
                     <div class="col-md-5">
-                      <h4 class="font-thin">事件</h4>
+                      <h3 class="font-thin">Top Songs</h3>
                       <div class="list-group bg-white list-group-lg no-bg auto">                          
                         <a href="#" class="list-group-item clearfix">
                           <span class="pull-right h2 text-muted m-l">1</span>
                           <span class="pull-left thumb-sm avatar m-r">
-                            <img src="<%=resourcePath %>images/a4.png" alt="...">
+                            <img src="images/a4.png" alt="...">
                           </span>
                           <span class="clear">
                             <span>Little Town</span>
@@ -1083,7 +1051,7 @@ String resourcePath = basePath+"page/home/";
                         <a href="#" class="list-group-item clearfix">
                           <span class="pull-right h2 text-muted m-l">2</span>
                           <span class="pull-left thumb-sm avatar m-r">
-                            <img src="<%=resourcePath %>images/a5.png" alt="...">
+                            <img src="images/a5.png" alt="...">
                           </span>
                           <span class="clear">
                             <span>Lementum ligula vitae</span>
@@ -1093,7 +1061,7 @@ String resourcePath = basePath+"page/home/";
                         <a href="#" class="list-group-item clearfix">
                           <span class="pull-right h2 text-muted m-l">3</span>
                           <span class="pull-left thumb-sm avatar m-r">
-                            <img src="<%=resourcePath %>images/a6.png" alt="...">
+                            <img src="images/a6.png" alt="...">
                           </span>
                           <span class="clear">
                             <span>Aliquam sollicitudin venenatis</span>
@@ -1103,7 +1071,7 @@ String resourcePath = basePath+"page/home/";
                         <a href="#" class="list-group-item clearfix">
                           <span class="pull-right h2 text-muted m-l">4</span>
                           <span class="pull-left thumb-sm avatar m-r">
-                            <img src="<%=resourcePath %>images/a7.png" alt="...">
+                            <img src="images/a7.png" alt="...">
                           </span>
                           <span class="clear">
                             <span>Aliquam sollicitudin venenatis ipsum</span>
@@ -1113,7 +1081,7 @@ String resourcePath = basePath+"page/home/";
                         <a href="#" class="list-group-item clearfix">
                           <span class="pull-right h2 text-muted m-l">5</span>
                           <span class="pull-left thumb-sm avatar m-r">
-                            <img src="<%=resourcePath %>images/a8.png" alt="...">
+                            <img src="images/a8.png" alt="...">
                           </span>
                           <span class="clear">
                             <span>Vestibulum ullamcorper</span>
@@ -1123,9 +1091,6 @@ String resourcePath = basePath+"page/home/";
                       </div>
                     </div>
                   </div>
-                  
-                  <!-- 底部登陆和下载app模块 -->
-                  <%--
                   <div class="row m-t-lg m-b-lg">
                     <div class="col-sm-6">
                       <div class="bg-primary wrapper-md r">
@@ -1144,12 +1109,7 @@ String resourcePath = basePath+"page/home/";
                       </div>
                     </div>
                   </div>
-                   --%>
-                  
                 </section>
-                
-                <!-- 底部音乐播放器 -->
-                <%--
                 <footer class="footer bg-dark">
                   <div id="jp_container_N">
                     <div class="jp-type-playlist">
@@ -1218,20 +1178,17 @@ String resourcePath = basePath+"page/home/";
                     </div>
                   </div>
                 </footer>
-                 --%>
-                
               </section>
             </section>
             <!-- side content -->
             <aside class="aside-md bg-light dk" id="sidebar">
               <section class="vbox animated fadeInRight">
-              	<%-- <section class="w-f-md scrollable hover"> --%>
-                <section class="scrollable hover">
-                  <h4 class="font-thin m-l-md m-t">最新动态</h4>
+                <section class="w-f-md scrollable hover">
+                  <h4 class="font-thin m-l-md m-t">Connected</h4>
                   <ul class="list-group no-bg no-borders auto m-t-n-xxs">
                     <li class="list-group-item">
                       <span class="pull-left thumb-xs m-t-xs avatar m-l-xs m-r-sm">
-                        <img src="<%=resourcePath %>images/a1.png" alt="..." class="img-circle">
+                        <img src="images/a1.png" alt="..." class="img-circle">
                         <i class="on b-light right sm"></i>
                       </span>
                       <div class="clear">
@@ -1241,7 +1198,7 @@ String resourcePath = basePath+"page/home/";
                     </li>
                     <li class="list-group-item">
                       <span class="pull-left thumb-xs m-t-xs avatar m-l-xs m-r-sm">
-                        <img src="<%=resourcePath %>images/a2.png" alt="...">
+                        <img src="images/a2.png" alt="...">
                         <i class="on b-light right sm"></i>
                       </span>
                       <div class="clear">
@@ -1251,7 +1208,7 @@ String resourcePath = basePath+"page/home/";
                     </li>
                     <li class="list-group-item">
                       <span class="pull-left thumb-xs m-t-xs avatar m-l-xs m-r-sm">
-                        <img src="<%=resourcePath %>images/a3.png" alt="...">
+                        <img src="images/a3.png" alt="...">
                         <i class="busy b-light right sm"></i>
                       </span>
                       <div class="clear">
@@ -1261,7 +1218,7 @@ String resourcePath = basePath+"page/home/";
                     </li>
                     <li class="list-group-item">
                       <span class="pull-left thumb-xs m-t-xs avatar m-l-xs m-r-sm">
-                        <img src="<%=resourcePath %>images/a4.png" alt="...">
+                        <img src="images/a4.png" alt="...">
                         <i class="away b-light right sm"></i>
                       </span>
                       <div class="clear">
@@ -1271,7 +1228,7 @@ String resourcePath = basePath+"page/home/";
                     </li>
                     <li class="list-group-item">
                       <span class="pull-left thumb-xs m-t-xs avatar m-l-xs m-r-sm">
-                        <img src="<%=resourcePath %>images/a5.png" alt="..." class="img-circle">
+                        <img src="images/a5.png" alt="..." class="img-circle">
                         <i class="on b-light right sm"></i>
                       </span>
                       <div class="clear">
@@ -1281,7 +1238,7 @@ String resourcePath = basePath+"page/home/";
                     </li>
                     <li class="list-group-item">
                       <span class="pull-left thumb-xs m-t-xs avatar m-l-xs m-r-sm">
-                        <img src="<%=resourcePath %>images/a6.png" alt="...">
+                        <img src="images/a6.png" alt="...">
                         <i class="on b-light right sm"></i>
                       </span>
                       <div class="clear">
@@ -1291,7 +1248,7 @@ String resourcePath = basePath+"page/home/";
                     </li>
                     <li class="list-group-item">
                       <span class="pull-left thumb-xs m-t-xs avatar m-l-xs m-r-sm">
-                        <img src="<%=resourcePath %>images/a7.png" alt="...">
+                        <img src="images/a7.png" alt="...">
                         <i class="busy b-light right sm"></i>
                       </span>
                       <div class="clear">
@@ -1301,7 +1258,7 @@ String resourcePath = basePath+"page/home/";
                     </li>
                     <li class="list-group-item">
                       <span class="pull-left thumb-xs m-t-xs avatar m-l-xs m-r-sm">
-                        <img src="<%=resourcePath %>images/a8.png" alt="...">
+                        <img src="images/a8.png" alt="...">
                         <i class="away b-light right sm"></i>
                       </span>
                       <div class="clear">
@@ -1311,7 +1268,7 @@ String resourcePath = basePath+"page/home/";
                     </li>
                     <li class="list-group-item">
                       <span class="pull-left thumb-xs m-t-xs avatar m-l-xs m-r-sm">
-                        <img src="<%=resourcePath %>images/a9.png" alt="..." class="img-circle">
+                        <img src="images/a9.png" alt="..." class="img-circle">
                         <i class="on b-light right sm"></i>
                       </span>
                       <div class="clear">
@@ -1321,7 +1278,7 @@ String resourcePath = basePath+"page/home/";
                     </li>
                     <li class="list-group-item">
                       <span class="pull-left thumb-xs m-t-xs avatar m-l-xs m-r-sm">
-                        <img src="<%=resourcePath %>images/a1.png" alt="...">
+                        <img src="images/a1.png" alt="...">
                         <i class="on b-light right sm"></i>
                       </span>
                       <div class="clear">
@@ -1331,7 +1288,7 @@ String resourcePath = basePath+"page/home/";
                     </li>
                     <li class="list-group-item">
                       <span class="pull-left thumb-xs m-t-xs avatar m-l-xs m-r-sm">
-                        <img src="<%=resourcePath %>images/a2.png" alt="...">
+                        <img src="images/a2.png" alt="...">
                         <i class="busy b-light right sm"></i>
                       </span>
                       <div class="clear">
@@ -1341,7 +1298,7 @@ String resourcePath = basePath+"page/home/";
                     </li>
                     <li class="list-group-item">
                       <span class="pull-left thumb-xs m-t-xs avatar m-l-xs m-r-sm">
-                        <img src="<%=resourcePath %>images/a3.png" alt="...">
+                        <img src="images/a3.png" alt="...">
                         <i class="away b-light right sm"></i>
                       </span>
                       <div class="clear">
@@ -1351,9 +1308,6 @@ String resourcePath = basePath+"page/home/";
                     </li>
                   </ul>
                 </section>
-                
-                <!-- 右侧下脚的搜索 -->
-                <%--
                 <footer class="footer footer-md bg-black">
                   <form class="" role="search">
                     <div class="form-group clearfix m-b-none">
@@ -1366,7 +1320,6 @@ String resourcePath = basePath+"page/home/";
                     </div>
                   </form>
                 </footer>
-               --%>
               </section>              
             </aside>
             <!-- / side content -->
@@ -1376,17 +1329,16 @@ String resourcePath = basePath+"page/home/";
       </section>
     </section>    
   </section>
-  <script src="<%=resourcePath %>js/jquery.min.js"></script>
+  <script src="js/jquery.min.js"></script>
   <!-- Bootstrap -->
-  <script src="<%=resourcePath %>js/bootstrap.js"></script>
+  <script src="js/bootstrap.js"></script>
   <!-- App -->
-  <script src="<%=resourcePath %>js/app.js"></script>  
-  <script src="<%=resourcePath %>js/slimscroll/jquery.slimscroll.min.js"></script>
-  <script src="js/app.plugin.js"></script>
-  <%-- 
-  <script type="text/javascript" src="<%=resourcePath %>js/jPlayer/jquery.jplayer.min.js"></script>
-  <script type="text/javascript" src="<%=resourcePath %>js/jPlayer/add-on/jplayer.playlist.min.js"></script>
-  <script type="text/javascript" src="<%=resourcePath %>js/jPlayer/demo.js"></script>
-	--%>
+  <script src="js/app.js"></script>  
+  <script src="js/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="js/app.plugin.js"></script>
+  <script type="text/javascript" src="js/jPlayer/jquery.jplayer.min.js"></script>
+  <script type="text/javascript" src="js/jPlayer/add-on/jplayer.playlist.min.js"></script>
+  <script type="text/javascript" src="js/jPlayer/demo.js"></script>
+
 </body>
 </html>

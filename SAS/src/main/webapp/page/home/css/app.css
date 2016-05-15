@@ -1952,8 +1952,10 @@ fieldset[disabled] .btn-dark.active {
   border-radius: 10px;
 }
 .doc-buttons .btn {
+  margin-top:6px;
   margin-bottom: 5px;
 }
+
 .list-icon i {
   font-size: 14px;
   width: 40px;
