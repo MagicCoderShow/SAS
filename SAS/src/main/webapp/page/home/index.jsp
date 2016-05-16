@@ -21,7 +21,8 @@ String resourcePath = basePath+"page/home/";
   <link rel="stylesheet" href="<%=resourcePath %>css/font-awesome.min.css" type="text/css" />
   <link rel="stylesheet" href="<%=resourcePath %>css/simple-line-icons.css" type="text/css" />
   <link rel="stylesheet" href="<%=resourcePath %>css/font.css" type="text/css" />
-  <link rel="stylesheet" href="<%=resourcePath %>css/app.css" type="text/css" />  
+  <link rel="stylesheet" href="<%=resourcePath %>css/app.css" type="text/css" />
+  <link rel="stylesheet" href="<%=resourcePath %>css/index.css" type="text/css" />    
     <!--[if lt IE 9]>
     <script src="<%=resourcePath %>js/ie/html5shiv.js"></script>
     <script src="<%=resourcePath %>js/ie/respond.min.js"></script>
@@ -129,6 +130,12 @@ String resourcePath = basePath+"page/home/";
               </li>
             </ul>
           </li>
+          </c:if>
+          <c:if test="${!sessionUser.id }">
+          	<div class="index-doc-buttons">
+	          	<a class="btn btn-s-md btn-lg btn-success" href="<%=resourcePath %>/signin.jsp">登录</a>
+				<a class="btn btn-s-md btn-lg btn-info" href="<%=resourcePath %>/signup.jsp">注册</a>
+			</div>
           </c:if>
         </ul>
       </div>      

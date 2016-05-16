@@ -22,7 +22,7 @@
     delete from user
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.xuping.sas.model.User">
+  <insert id="insert" parameterType="com.xuping.sas.model.User" keyProperty="id" useGeneratedKeys="true">
     insert into user (id, name, login_name, 
       login_pwd, create_date, update_date
       )
@@ -30,7 +30,7 @@
       #{loginPwd,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.xuping.sas.model.User" >
+  <insert id="insertSelective" parameterType="com.xuping.sas.model.User" keyProperty="id" useGeneratedKeys="true">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -103,4 +103,11 @@
       update_date = #{updateDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectByloginName" resultMap="BaseResultMap" parameterType="java.lang.String" useCache="false">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where flag=0 and loginname = #{loginname,jdbcType=VARCHAR}
+  </select>
 </mapper>
