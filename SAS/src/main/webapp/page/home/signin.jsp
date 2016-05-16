@@ -48,7 +48,7 @@ String resourcePath = basePath+"page/home/";
           <div class="text-center m-t m-b"><a href="#"><small>忘记密码?</small></a></div>
           <div class="line line-dashed"></div>
           <p class="text-muted text-center"><small>没有账号?</small></p>
-          <a href="<%=resourcePath %>/signup.jsp" class="btn btn-lg btn-info btn-block rounded">用户注册</a>
+          <a href="<%=resourcePath %>signup.jsp" class="btn btn-lg btn-info btn-block rounded">用户注册</a>
         </form>
       </section>
     </div>

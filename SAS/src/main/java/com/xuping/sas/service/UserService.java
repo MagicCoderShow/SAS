@@ -16,28 +16,28 @@ public interface UserService {
 	 * @param id
 	 * @return
 	 */
-	int deleteByPrimaryKey(Integer id);
+	int deleteByPrimaryKey(String id);
 
 	/**
 	 * 插入
 	 * @param record
 	 * @return
 	 */
-    int insert(User record);
+	String insert(User record);
 
     /**
      * 插入部分字段
      * @param record
      * @return
      */
-    int insertSelective(User record);
+    String insertSelective(User record);
 
     /**
      * 根据id查询
      * @param id
      * @return
      */
-    User selectByPrimaryKey(Integer id);
+    User selectByPrimaryKey(String id);
 
     /**
      * 更新部分字段
@@ -59,4 +59,11 @@ public interface UserService {
      * @return
      */
     User selectByLoginName(String loginname);
+    
+    /**
+     * 根据email查询用户
+     * @param email
+     * @return
+     */
+    User selectByEmail(String email);
 }

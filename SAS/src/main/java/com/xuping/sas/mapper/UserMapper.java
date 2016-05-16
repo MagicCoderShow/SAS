@@ -3,13 +3,13 @@ package com.xuping.sas.mapper;
 import com.xuping.sas.model.User;
 
 public interface UserMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(String id);
 
-    int insert(User record);
+    String insert(User record);
 
-    int insertSelective(User record);
+    String insertSelective(User record);
 
-    User selectByPrimaryKey(Integer id);
+    User selectByPrimaryKey(String id);
 
     int updateByPrimaryKeySelective(User record);
 
@@ -21,4 +21,11 @@ public interface UserMapper {
      * @return
      */
     User selectByLoginName(String loginname);
+    
+    /**
+     * 根据email查询用户
+     * @param email
+     * @return
+     */
+    User selectByEmail(String email);
 }

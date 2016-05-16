@@ -12,63 +12,78 @@ import java.util.Date;
  */
 @SuppressWarnings("serial")
 public class User implements Serializable{
-    private Integer id;
 
-    private String name;
+	private String id;
+	private String userName;
+	private String loginName;
+	private String loginPassword;
+	private Date createDate;
+	private Date updateDate;
+	private Integer status;
+	private String userEmail;
 
-    private String loginName;
+	public String getId() {
+		return id;
+	}
 
-    private String loginPwd;
+	public void setId(String id) {
+		this.id = id == null ? null : id.trim();
+	}
 
-    private Date createDate;
+	public String getUserName() {
+		return userName;
+	}
 
-    private Date updateDate;
+	public void setUserName(String userName) {
+		this.userName = userName == null ? null : userName.trim();
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public String getLoginName() {
+		return loginName;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setLoginName(String loginName) {
+		this.loginName = loginName == null ? null : loginName.trim();
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getLoginPassword() {
+		return loginPassword;
+	}
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
+	public void setLoginPassword(String loginPassword) {
+		this.loginPassword = loginPassword == null ? null : loginPassword.trim();
+	}
 
-    public String getLoginName() {
-        return loginName;
-    }
+	public Date getCreateDate() {
+		return createDate;
+	}
 
-    public void setLoginName(String loginName) {
-        this.loginName = loginName == null ? null : loginName.trim();
-    }
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
 
-    public String getLoginPwd() {
-        return loginPwd;
-    }
+	public Date getUpdateDate() {
+		return updateDate;
+	}
 
-    public void setLoginPwd(String loginPwd) {
-        this.loginPwd = loginPwd == null ? null : loginPwd.trim();
-    }
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+	}
 
-    public Date getCreateDate() {
-        return createDate;
-    }
+	public Integer getStatus() {
+		return status;
+	}
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 
-    public Date getUpdateDate() {
-        return updateDate;
-    }
+	public String getUserEmail() {
+		return userEmail;
+	}
 
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
-    }
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail == null ? null : userEmail.trim();
+	}
+	
 }
