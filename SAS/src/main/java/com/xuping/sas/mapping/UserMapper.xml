@@ -128,134 +128,6 @@
 		user_email = #{userEmail,jdbcType=VARCHAR}
 		where id = #{id,jdbcType=VARCHAR}
 	</update>
-	<resultMap id="BaseResultMap" type="com.xuping.sas.model.User">
-		<id column="id" jdbcType="INTEGER" property="id" />
-		<result column="user_name" jdbcType="VARCHAR" property="userName" />
-		<result column="login_name" jdbcType="VARCHAR" property="loginName" />
-		<result column="login_password" jdbcType="VARCHAR" property="loginPassword" />
-		<result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
-		<result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
-		<result column="status" jdbcType="INTEGER" property="status" />
-		<result column="user_email" jdbcType="VARCHAR" property="userEmail" />
-	</resultMap>
-	<sql id="Base_Column_List">
-		id, user_name, login_name, login_password, create_date, update_date,
-		status, user_email
-	</sql>
-	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
-		resultMap="BaseResultMap">
-		select
-		<include refid="Base_Column_List" />
-		from sys_user
-		where id = #{id,jdbcType=INTEGER}
-	</select>
-	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-		delete from sys_user
-		where id = #{id,jdbcType=INTEGER}
-	</delete>
-	<insert id="insert" parameterType="com.xuping.sas.model.User">
-		insert into sys_user (id, user_name, login_name,
-		login_password, create_date, update_date,
-		status, user_email)
-		values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR},
-		#{loginName,jdbcType=VARCHAR},
-		#{loginPassword,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP},
-		#{status,jdbcType=INTEGER}, #{userEmail,jdbcType=VARCHAR})
-	</insert>
-	<insert id="insertSelective" parameterType="com.xuping.sas.model.User">
-		insert into sys_user
-		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="id != null">
-				id,
-			</if>
-			<if test="userName != null">
-				user_name,
-			</if>
-			<if test="loginName != null">
-				login_name,
-			</if>
-			<if test="loginPassword != null">
-				login_password,
-			</if>
-			<if test="createDate != null">
-				create_date,
-			</if>
-			<if test="updateDate != null">
-				update_date,
-			</if>
-			<if test="status != null">
-				status,
-			</if>
-			<if test="userEmail != null">
-				user_email,
-			</if>
-		</trim>
-		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="id != null">
-				#{id,jdbcType=INTEGER},
-			</if>
-			<if test="userName != null">
-				#{userName,jdbcType=VARCHAR},
-			</if>
-			<if test="loginName != null">
-				#{loginName,jdbcType=VARCHAR},
-			</if>
-			<if test="loginPassword != null">
-				#{loginPassword,jdbcType=VARCHAR},
-			</if>
-			<if test="createDate != null">
-				#{createDate,jdbcType=TIMESTAMP},
-			</if>
-			<if test="updateDate != null">
-				#{updateDate,jdbcType=TIMESTAMP},
-			</if>
-			<if test="status != null">
-				#{status,jdbcType=INTEGER},
-			</if>
-			<if test="userEmail != null">
-				#{userEmail,jdbcType=VARCHAR},
-			</if>
-		</trim>
-	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="com.xuping.sas.model.User">
-		update sys_user
-		<set>
-			<if test="userName != null">
-				user_name = #{userName,jdbcType=VARCHAR},
-			</if>
-			<if test="loginName != null">
-				login_name = #{loginName,jdbcType=VARCHAR},
-			</if>
-			<if test="loginPassword != null">
-				login_password = #{loginPassword,jdbcType=VARCHAR},
-			</if>
-			<if test="createDate != null">
-				create_date = #{createDate,jdbcType=TIMESTAMP},
-			</if>
-			<if test="updateDate != null">
-				update_date = #{updateDate,jdbcType=TIMESTAMP},
-			</if>
-			<if test="status != null">
-				status = #{status,jdbcType=INTEGER},
-			</if>
-			<if test="userEmail != null">
-				user_email = #{userEmail,jdbcType=VARCHAR},
-			</if>
-		</set>
-		where id = #{id,jdbcType=INTEGER}
-	</update>
-	<update id="updateByPrimaryKey" parameterType="com.xuping.sas.model.User">
-		update sys_user
-		set user_name = #{userName,jdbcType=VARCHAR},
-		login_name = #{loginName,jdbcType=VARCHAR},
-		login_password = #{loginPassword,jdbcType=VARCHAR},
-		create_date = #{createDate,jdbcType=TIMESTAMP},
-		update_date = #{updateDate,jdbcType=TIMESTAMP},
-		status = #{status,jdbcType=INTEGER},
-		user_email = #{userEmail,jdbcType=VARCHAR}
-		where id = #{id,jdbcType=INTEGER}
-	</update>
-
 	<!-- 根据用户名查询 -->
 	<select id="selectByloginName" parameterType="java.lang.String"
 		resultMap="BaseResultMap" useCache="false">
@@ -266,7 +138,7 @@
 	</select>
 
 	<!-- 根据用户名查询 -->
-	<select id="selectByloginName" parameterType="java.lang.String"
+	<select id="selectByEmail" parameterType="java.lang.String"
 		resultMap="BaseResultMap" useCache="false">
 		select
 		id, name, login_name
