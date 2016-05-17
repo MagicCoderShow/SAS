@@ -1,16 +1,21 @@
 package com.xuping.sas.controller;
 
+import java.security.KeyPair;
 import java.security.PrivateKey;
+import java.security.interfaces.RSAPublicKey;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.binary.Hex;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
@@ -33,6 +38,29 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
+	/**
+	 * 获取公钥
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @return
+	 * @throws Exception
+	 */
+	@ResponseBody
+	@RequestMapping(value="getrsakey",method=RequestMethod.POST)
+	public Map<String, String> getrsakey(HttpServletRequest request, HttpServletResponse response,HttpSession session) throws Exception{
+		KeyPair keypair = RSAUtils.getKeyPair();
+		RSAPublicKey  publicKey =(RSAPublicKey) keypair.getPublic();
+		String modulus = new String(Hex.encodeHex(publicKey.getModulus().toByteArray()));
+		String exponent = new String(Hex.encodeHex(publicKey.getPublicExponent().toByteArray()));
+		session.setAttribute("modulus",modulus );
+		session.setAttribute("exponent", exponent);
+		session.setAttribute("private", RSAUtils.getDefaultPrivateKey(keypair));
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("modulus", modulus);
+		map.put("exponent", exponent);
+		return map;
+	}
 	
 	/**
 	 * 登陆

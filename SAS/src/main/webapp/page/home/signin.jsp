@@ -37,15 +37,16 @@ String resourcePath = basePath+"page/home/";
         <header class="wrapper text-center">
           <strong>登录，是一种态度</strong>
         </header>
-        <form action="<%=resourcePath %>user/login" method="post">
+        <form id="login_form" action="<%=basePath %>user/login" method="post">
+          <input type="hidden" name="data" id="logindata">
           <div class="form-group">
-            <input type="input" placeholder="请输入用户名，邮箱，手机号" class="form-control rounded input-lg text-center no-border">
+            <input id="j_username" type="input" placeholder="请输入用户名，邮箱，手机号" class="form-control rounded input-lg text-center no-border">
           </div>
           <div class="form-group">
-             <input type="password" placeholder="请输入密码" class="form-control rounded input-lg text-center no-border">
+             <input id="j_password" type="password" placeholder="请输入密码" class="form-control rounded input-lg text-center no-border">
           </div>
-          <button type="submit" class="btn btn-lg btn-warning lt b-white b-2x btn-block btn-rounded"><i class="icon-arrow-right pull-right"></i><span class="m-r-n-lg">登陆</span></button>
-          <div class="text-center m-t m-b"><a href="<%=resourcePath %>forget"><small>忘记密码?</small></a></div>
+          <a class="btn btn-lg btn-warning lt b-white b-2x btn-block btn-rounded" onclick="login()"><i class="icon-arrow-right pull-right"></i><span class="m-r-n-lg">登陆</span></a>
+          <div class="text-center m-t m-b"><a href="<%=basePath %>user/forget"><small>忘记密码?</small></a></div>
           <div class="line line-dashed"></div>
           <p class="text-muted text-center"><small>没有账号?</small></p>
           <a href="<%=resourcePath %>signup.jsp" class="btn btn-lg btn-info btn-block rounded">用户注册</a>
@@ -72,6 +73,49 @@ String resourcePath = basePath+"page/home/";
   <script type="text/javascript" src="<%=resourcePath %>js/jPlayer/jquery.jplayer.min.js"></script>
   <script type="text/javascript" src="<%=resourcePath %>js/jPlayer/add-on/jplayer.playlist.min.js"></script>
   <script type="text/javascript" src="<%=resourcePath %>js/jPlayer/demo.js"></script>
-
+  <script type="text/javascript" src="<%=resourcePath %>js/security.js"></script>
+  <!-- javascript -->
+  <script type="text/javascript">
+	  $(function () {
+		  //设置cookie
+		  if ($.cookie("USER_NAME")){
+			    $("#j_username").val($.cookie(COOKIE_NAME));
+			    $("#j_password").focus();
+			} else {
+				$("#j_username").focus();
+			}
+	  });
+	  
+	  //登录
+	  function login(){
+		  	//检查参数是否完整
+		  	var username=$('#j_username').val(), password=$('#j_password').val();
+		  	if(!username){
+				alert("请输入用户名");
+				return false;
+			}else if(!password){
+				alert("请输入密码");
+				return false;
+			}
+		  	//拼接参数串
+		  	var json ="{\"loginno\":\""+$('#j_username').val()+
+			"\",\"pwd\":\""+$('#j_password').val()+"\"}";
+			//获取公钥
+			$.ajax({
+				type:'post',
+				url:'<%=basePath%>user/getrsakey',
+				success:function(msg){
+					console.log(msg);
+					var key = RSAUtils.getKeyPair(msg.exponent, '', msg.modulus);
+					var data = RSAUtils.encryptedString(key , json);
+					$("#logindata").val(data);
+					$("#j_username").val("");
+					$("#j_password").val("");
+					$("#login_form").submit();
+				}
+			});
+		  
+	  }
+  </script>
 </body>
 </html>

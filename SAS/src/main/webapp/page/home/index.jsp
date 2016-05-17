@@ -133,8 +133,8 @@ String resourcePath = basePath+"page/home/";
           </c:if>
           <c:if test="${!sessionUser.id }">
           	<div class="index-doc-buttons">
-	          	<a class="btn btn-s-md btn-lg btn-success" href="<%=resourcePath %>/signin.jsp">登录</a>
-				<a class="btn btn-s-md btn-lg btn-info" href="<%=resourcePath %>/signup.jsp">注册</a>
+	          	<a class="btn btn-s-md btn-lg btn-success" href="<%=resourcePath %>signin.jsp">登录</a>
+				<a class="btn btn-s-md btn-lg btn-info" href="<%=resourcePath %>signup.jsp">注册</a>
 			</div>
           </c:if>
         </ul>
