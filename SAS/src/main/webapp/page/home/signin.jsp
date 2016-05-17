@@ -44,8 +44,8 @@ String resourcePath = basePath+"page/home/";
           <div class="form-group">
              <input type="password" placeholder="请输入密码" class="form-control rounded input-lg text-center no-border">
           </div>
-          <button type="submit" class="btn btn-lg btn-warning lt b-white b-2x btn-block btn-rounded"><i class="icon-arrow-right pull-right"></i><span class="m-r-n-lg">Sign in</span></button>
-          <div class="text-center m-t m-b"><a href="#"><small>忘记密码?</small></a></div>
+          <button type="submit" class="btn btn-lg btn-warning lt b-white b-2x btn-block btn-rounded"><i class="icon-arrow-right pull-right"></i><span class="m-r-n-lg">登陆</span></button>
+          <div class="text-center m-t m-b"><a href="<%=resourcePath %>forget"><small>忘记密码?</small></a></div>
           <div class="line line-dashed"></div>
           <p class="text-muted text-center"><small>没有账号?</small></p>
           <a href="<%=resourcePath %>signup.jsp" class="btn btn-lg btn-info btn-block rounded">用户注册</a>
