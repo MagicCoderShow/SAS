@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="sys_user">
+<mapper namespace="com.xuping.sas.mapper.UserMapper">
 	<resultMap id="BaseResultMap" type="com.xuping.sas.model.User">
 		<id column="id" jdbcType="VARCHAR" property="id" />
 		<result column="user_name" jdbcType="VARCHAR" property="userName" />
@@ -129,20 +129,20 @@
 		where id = #{id,jdbcType=VARCHAR}
 	</update>
 	<!-- 根据用户名查询 -->
-	<select id="selectByloginName" parameterType="java.lang.String"
+	<select id="selectByLoginName" parameterType="java.lang.String"
 		resultMap="BaseResultMap" useCache="false">
 		select
-		id, name, login_name
-		from user
-		where status=0 and loginname = #{loginname,jdbcType=VARCHAR}
+		id, user_name, login_name,login_password
+		from sys_user
+		where status=1 and login_name = #{loginname,jdbcType=VARCHAR}
 	</select>
 
 	<!-- 根据用户名查询 -->
 	<select id="selectByEmail" parameterType="java.lang.String"
 		resultMap="BaseResultMap" useCache="false">
 		select
-		id, name, login_name
-		from user
-		where status=0 and eamil = #{eamil,jdbcType=VARCHAR}
+		id, user_name, login_name,login_password
+		from sys_user
+		where status=1 and user_email = #{eamil,jdbcType=VARCHAR}
 	</select>
 </mapper>

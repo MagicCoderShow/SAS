@@ -1,7 +1,7 @@
 package com.xuping.sas.controller;
 
-import java.security.KeyPair;
 import java.security.PrivateKey;
+import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.codec.binary.Hex;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,16 +48,18 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value="getrsakey",method=RequestMethod.POST)
 	public Map<String, String> getrsakey(HttpServletRequest request, HttpServletResponse response,HttpSession session) throws Exception{
-		KeyPair keypair = RSAUtils.getKeyPair();
-		RSAPublicKey  publicKey =(RSAPublicKey) keypair.getPublic();
-		String modulus = new String(Hex.encodeHex(publicKey.getModulus().toByteArray()));
-		String exponent = new String(Hex.encodeHex(publicKey.getPublicExponent().toByteArray()));
-		session.setAttribute("modulus",modulus );
-		session.setAttribute("exponent", exponent);
-		session.setAttribute("private", RSAUtils.getDefaultPrivateKey(keypair));
+		HashMap<String, Object> rsmap = RSAUtils.getKeys();   
+		//生成公钥和私钥    
+        RSAPublicKey publicKey = (RSAPublicKey) rsmap.get("public");    
+        RSAPrivateKey privateKey = (RSAPrivateKey) rsmap.get("private");  
+        session.setAttribute("privateKey", privateKey);//私钥保存在session中，用于解密  
+        //公钥信息保存在页面，用于加密  
+        String publicKeyExponent = publicKey.getPublicExponent().toString(16);  
+        String publicKeyModulus = publicKey.getModulus().toString(16);  
+
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("modulus", modulus);
-		map.put("exponent", exponent);
+		map.put("modulus", publicKeyModulus);
+		map.put("exponent", publicKeyExponent);
 		return map;
 	}
 	
@@ -74,17 +75,22 @@ public class UserController {
 	public ModelAndView signup(String data,HttpSession session,HttpServletRequest request){
 		ModelAndView mv = new ModelAndView("home/index");
 		//解密
-		data = Base64SecurityUtil.getEncryptString(data);
+//		data = Base64SecurityUtil.getEncryptString(data);
 		//获取私钥
-		PrivateKey privatekey = (PrivateKey) session.getAttribute("private");
+		RSAPrivateKey privateKey = (RSAPrivateKey)session.getAttribute("privateKey"); 
 		String decryptData = "";
 		data = data.replaceAll(" ", "");
 		Map<String,String> params = new HashMap<String,String>();
-		if(privatekey != null){
-			decryptData = RSAUtils.jsDecryptString(data,privatekey);
-			params = (Map<String, String>) JSON.parse(data);
+		if(privateKey != null){
+			try {
+				decryptData = RSAUtils.decryptByPrivateKey(data,privateKey);
+				StringBuffer buffer = new StringBuffer(decryptData);
+				decryptData = buffer.reverse().toString();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-		params = (Map<String, String>) JSON.parse(data);
+		params = (Map<String, String>) JSON.parse(decryptData);
 		String loginname = params.get("loginname");
 		String email = params.get("email");
 		String password =params.get("password");
@@ -145,17 +151,22 @@ public class UserController {
 	public ModelAndView login(String data,HttpSession session,HttpServletRequest request){
 		ModelAndView mv = new ModelAndView("home/index");
 		//解密
-		data = Base64SecurityUtil.getEncryptString(data);
+//		data = Base64SecurityUtil.getEncryptString(data);
 		//获取私钥
-		PrivateKey privatekey = (PrivateKey) session.getAttribute("private");
+		RSAPrivateKey privateKey = (RSAPrivateKey)session.getAttribute("privateKey"); 
 		String decryptData = "";
 		data = data.replaceAll(" ", "");
 		Map<String,String> params = new HashMap<String,String>();
-		if(privatekey != null){
-			decryptData = RSAUtils.jsDecryptString(data,privatekey);
-			params = (Map<String, String>) JSON.parse(data);
+		if(privateKey != null){
+			try {
+				decryptData = RSAUtils.decryptByPrivateKey(data,privateKey);
+				StringBuffer buffer = new StringBuffer(decryptData);
+				decryptData = buffer.reverse().toString();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-		params = (Map<String, String>) JSON.parse(data);
+		params = (Map<String, String>) JSON.parse(decryptData);
 		String loginname = params.get("loginname");
 		String password =params.get("password");;
 		String code = params.get("code");
@@ -172,12 +183,16 @@ public class UserController {
 					session.setAttribute("sessionUser",user);
 				}else{
 					//用户名密码错误
-					mv.setViewName("home/login");
-					mv.addObject("warn", "用户名密码错误");
+					mv.setViewName("home/signin");
+					mv.addObject("warn", "用户名或密码错误");
 				}
+			}else{
+				//用户名密码错误
+				mv.setViewName("home/signin");
+				mv.addObject("warn", "用户名或密码错误");
 			}
 		}else{
-			mv.setViewName("home/login");
+			mv.setViewName("home/signin");
 		}
 		return mv;
 	}

@@ -98,14 +98,15 @@ String resourcePath = basePath+"page/home/";
 				return false;
 			}
 		  	//拼接参数串
-		  	var json ="{\"loginno\":\""+$('#j_username').val()+
-			"\",\"pwd\":\""+$('#j_password').val()+"\"}";
+		  	var json ="{\"loginname\":\""+$('#j_username').val()+
+			"\",\"password\":\""+$('#j_password').val()+"\"}";
 			//获取公钥
 			$.ajax({
 				type:'post',
 				url:'<%=basePath%>user/getrsakey',
 				success:function(msg){
 					console.log(msg);
+					RSAUtils.setMaxDigits(200); 
 					var key = RSAUtils.getKeyPair(msg.exponent, '', msg.modulus);
 					var data = RSAUtils.encryptedString(key , json);
 					$("#logindata").val(data);

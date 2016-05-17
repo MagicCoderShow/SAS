@@ -1,5 +1,7 @@
 package com.xuping.sas.mapper;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.xuping.sas.model.User;
 
 public interface UserMapper {
@@ -20,12 +22,12 @@ public interface UserMapper {
      * @param loginname
      * @return
      */
-    User selectByLoginName(String loginname);
+    User selectByLoginName(@Param("loginname")String loginname);
     
     /**
      * 根据email查询用户
      * @param email
      * @return
      */
-    User selectByEmail(String email);
+    User selectByEmail(@Param("email")String email);
 }

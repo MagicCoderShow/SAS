@@ -65,7 +65,7 @@ String resourcePath = basePath+"page/home/";
       </form>
       <div class="navbar-right ">
         <ul class="nav navbar-nav m-n hidden-xs nav-user user">
-        <c:if test="${sessionUser.id }">
+        <c:if test="${!empty sessionUser}">
           <li class="hidden-xs">
             <a href="#" class="dropdown-toggle lt" data-toggle="dropdown">
               <i class="icon-bell"></i>
@@ -105,7 +105,7 @@ String resourcePath = basePath+"page/home/";
               <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
                 <img src="<%=resourcePath %>images/a0.png" alt="...">
               </span>
-              admin <b class="caret"></b>
+              ${sessionUser.userName } <b class="caret"></b>
             </a>
             <ul class="dropdown-menu animated fadeInRight">            
               <li>
@@ -131,7 +131,7 @@ String resourcePath = basePath+"page/home/";
             </ul>
           </li>
           </c:if>
-          <c:if test="${!sessionUser.id }">
+          <c:if test="${empty sessionUser}">
           	<div class="index-doc-buttons">
 	          	<a class="btn btn-s-md btn-lg btn-success" href="<%=resourcePath %>signin.jsp">登录</a>
 				<a class="btn btn-s-md btn-lg btn-info" href="<%=resourcePath %>signup.jsp">注册</a>
@@ -1382,7 +1382,7 @@ String resourcePath = basePath+"page/home/";
   <!-- App -->
   <script src="<%=resourcePath %>js/app.js"></script>  
   <script src="<%=resourcePath %>js/slimscroll/jquery.slimscroll.min.js"></script>
-  <script src="js/app.plugin.js"></script>
+  <script src="<%=resourcePath %>js/app.plugin.js"></script>
   <%-- 
   <script type="text/javascript" src="<%=resourcePath %>js/jPlayer/jquery.jplayer.min.js"></script>
   <script type="text/javascript" src="<%=resourcePath %>js/jPlayer/add-on/jplayer.playlist.min.js"></script>
