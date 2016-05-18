@@ -20,7 +20,7 @@ public class RSAUtils {
     public static HashMap<String, Object> getKeys() throws NoSuchAlgorithmException{    
         HashMap<String, Object> map = new HashMap<String, Object>();    
         KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("RSA", new org.bouncycastle.jce.provider.BouncyCastleProvider());    
-        keyPairGen.initialize(512);    
+        keyPairGen.initialize(1024);    
         KeyPair keyPair = keyPairGen.generateKeyPair();    
         RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();    
         RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();    

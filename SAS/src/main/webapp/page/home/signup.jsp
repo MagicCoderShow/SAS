@@ -37,25 +37,26 @@ String resourcePath = basePath+"page/home/";
         <header class="wrapper text-center">
           <strong>注册发现有趣的事情</strong>
         </header>
-        <form action="<%=resourcePath %>user/signup" method="post">
+        <form id="signup_form" action="<%=basePath %>user/signup" method="post">
+          <input type="hidden" name="data" id="signupdata">
           <div class="form-group">
-            <input placeholder="请输入用户名" class="form-control rounded input-lg text-center no-border">
+            <input id="j_loginname" name="loginname" placeholder="请输入用户名" class="form-control rounded input-lg text-center no-border">
           </div>
           <div class="form-group">
-            <input type="email" placeholder="请输入电子邮箱" class="form-control rounded input-lg text-center no-border">
+            <input id="j_email" name="email" type="email" placeholder="请输入电子邮箱" class="form-control rounded input-lg text-center no-border">
           </div>
           <div class="form-group">
-             <input type="password" placeholder="请输入密码" class="form-control rounded input-lg text-center no-border">
+             <input id="j_password" name="password" type="password" placeholder="请输入密码" class="form-control rounded input-lg text-center no-border">
           </div>
           <div class="form-group">
-             <input type="password" placeholder="请重复密码" class="form-control rounded input-lg text-center no-border">
+             <input id="j_repassword" name="repassword" type="password" placeholder="请重复密码" class="form-control rounded input-lg text-center no-border">
           </div>
           <div class="checkbox i-checks m-b">
             <label class="m-l">
-              <input type="checkbox" checked=""><i></i> 同意 <a href="#">条款和政策</a>
+              <input id="j_agree" type="checkbox"><i></i> 同意 <a href="#">条款和政策</a>
             </label>
           </div>
-          <button type="submit" class="btn btn-lg btn-warning lt b-white b-2x btn-block btn-rounded"><i class="icon-arrow-right pull-right"></i><span class="m-r-n-lg">注册</span></button>
+          <a class="btn btn-lg btn-warning lt b-white b-2x btn-block btn-rounded" onclick="signup()"><i class="icon-arrow-right pull-right"></i><span class="m-r-n-lg">注册</span></a>
           <div class="line line-dashed"></div>
           <p class="text-muted text-center"><small>已经拥有帐号?</small></p>
           <a href="<%=resourcePath %>/signin.jsp" class="btn btn-lg btn-info btn-block btn-rounded">登录</a>
@@ -82,6 +83,53 @@ String resourcePath = basePath+"page/home/";
   <script type="text/javascript" src="<%=resourcePath %>js/jPlayer/jquery.jplayer.min.js"></script>
   <script type="text/javascript" src="<%=resourcePath %>js/jPlayer/add-on/jplayer.playlist.min.js"></script>
   <script type="text/javascript" src="<%=resourcePath %>js/jPlayer/demo.js"></script>
-
+  <script type="text/javascript" src="<%=resourcePath %>js/security.js"></script>
+<!-- javascript -->
+  <script type="text/javascript">
+	  //注册
+	  function signup(){
+		  	//检查参数是否完整
+		  	var loginname=$('#j_loginname').val(),email=$('#j_email').val(),password=$('#j_password').val(),repassword=$('#j_repassword').val();
+		  	if(!loginname){
+				alert("请输入用户名");
+				return false;
+			}else if(!email){
+				alert("请输入电子邮箱");
+				return false;
+			}else if(!password){
+				alert("请输入密码");
+				return false;
+			}else if(!repassword){
+				alert("请输入重复密码");
+				return false;
+			}
+		  	if(password!=repassword){
+		  		alert("密码不一致");
+				return false;
+		  	}
+		  	//拼接参数串
+		  	var json ="{\"loginname\":\""+loginname+
+			"\",\"email\":\""+email+"\",\"password\":\""+password+
+			"\",\"repassword\":\""+repassword+"\"}";
+			console.log(json);
+			//获取公钥
+			$.ajax({
+				type:'post',
+				url:'<%=basePath%>user/getrsakey',
+				success:function(msg){
+					RSAUtils.setMaxDigits(200); 
+					var key = RSAUtils.getKeyPair(msg.exponent, '', msg.modulus);
+					var data = RSAUtils.encryptedString(key , json);
+					$("#signupdata").val(data);
+					$("#j_loginname").val("");
+					$("#j_email").val("");
+					$("#j_password").val("");
+					$("#j_repassword").val("");
+					$("#signup_form").submit();
+				}
+			});
+		  
+	  }
+  </script>
 </body>
 </html>

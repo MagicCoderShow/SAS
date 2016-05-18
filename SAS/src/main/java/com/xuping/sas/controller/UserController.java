@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Strings;
+import com.xuping.sas.intercept.Const;
 import com.xuping.sas.model.User;
 import com.xuping.sas.service.UserService;
 import com.xuping.sas.util.Base64SecurityUtil;
@@ -73,9 +74,7 @@ public class UserController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="signup",method=RequestMethod.POST)
 	public ModelAndView signup(String data,HttpSession session,HttpServletRequest request){
-		ModelAndView mv = new ModelAndView("home/index");
-		//解密
-//		data = Base64SecurityUtil.getEncryptString(data);
+		ModelAndView mv = new ModelAndView("home/signup");
 		//获取私钥
 		RSAPrivateKey privateKey = (RSAPrivateKey)session.getAttribute("privateKey"); 
 		String decryptData = "";
@@ -97,45 +96,48 @@ public class UserController {
 		String repassword =params.get("repassword");
 		String validatecode = params.get("validatecode");
 		//验证参数
-		if(!Strings.isNullOrEmpty(validatecode)){
+//		if(!Strings.isNullOrEmpty(validatecode)){
 			//验证验证码是否正确
-			if(validatecode.equals(session.getAttribute("validatecode"))){
+//			if(validatecode.equals(session.getAttribute("validatecode"))){
 				if(!Strings.isNullOrEmpty(password)&&!Strings.isNullOrEmpty(repassword)&&password.equals(repassword)){
 					if(!Strings.isNullOrEmpty(loginname)){
 						if(!Strings.isNullOrEmpty(email)){
 							//所有参数正确，校验用户名是否存在
-							User tempUser = userService.selectByLoginName(loginname);
+							User tempUser = userService.selectByLoginName(loginname.toLowerCase());
 							if(null==tempUser){
 								//校验邮箱是否存在
-								tempUser = userService.selectByEmail(email);
+								tempUser = userService.selectByEmail(email.toLowerCase());
 								if(null==tempUser){
 									User user = new User();
-									user.setLoginName(loginname);
-									user.setUserEmail(email);
+									user.setLoginName(loginname.toLowerCase());
+									user.setUserEmail(email.toLowerCase());
 									user.setLoginPassword(MD5Helper.getMD5ofStr(password));
 									userService.insertSelective(user);
 								}else{
 									//邮箱已经注册
+									mv.addObject("errorMessage","该邮箱已注册");
 								}
 							}else{
 								//用户名已经存在
+								mv.addObject("errorMessage","该用户名已注册");
 							}
-							
 						}else{
 							//密码不能为空
+							mv.addObject("errorMessage","密码不能为空");
 						}
 					}else{
 						//用户名不能为空
+						mv.addObject("errorMessage","用户名不能为空");
 					}
 				}else{
 					//密码与重复密码不一致
+					mv.addObject("errorMessage","两次密码输入不一致");
 				}
-			}else{
-				//验证码不正确
-			}
-		}else{
-			mv.setViewName("home/login");
-		}
+//			}else{
+//				//验证码不正确
+//				mv.addObject("errorMessage","验证码错误");
+//			}
+//		}
 		return mv;
 	}
 	
@@ -150,8 +152,6 @@ public class UserController {
 	@RequestMapping(value="login",method=RequestMethod.POST)
 	public ModelAndView login(String data,HttpSession session,HttpServletRequest request){
 		ModelAndView mv = new ModelAndView("home/index");
-		//解密
-//		data = Base64SecurityUtil.getEncryptString(data);
 		//获取私钥
 		RSAPrivateKey privateKey = (RSAPrivateKey)session.getAttribute("privateKey"); 
 		String decryptData = "";
@@ -173,14 +173,14 @@ public class UserController {
 		//验证参数
 		if(null!=loginname&&!Strings.isNullOrEmpty(password)&&Strings.isNullOrEmpty(code)){
 			//查询用户
-			User user = userService.selectByLoginName(loginname);
+			User user = userService.selectByLoginName(loginname.toLowerCase());
 			if(null!=user&&null!=user.getLoginPassword()){
 				password = MD5Helper.getMD5ofStr(password);
 				//判断密码是否正确
 				if(password.equals(user.getLoginPassword())){
 					//密码正确
 					user.setLoginPassword(null);
-					session.setAttribute("sessionUser",user);
+					session.setAttribute(Const.SESSION_USER,user);
 				}else{
 					//用户名密码错误
 					mv.setViewName("home/signin");
@@ -194,6 +194,22 @@ public class UserController {
 		}else{
 			mv.setViewName("home/signin");
 		}
+		return mv;
+	}
+	
+	
+	/**
+	 * 退出
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="logout",method=RequestMethod.GET)
+	public ModelAndView logout(HttpSession session,HttpServletRequest request){
+		ModelAndView mv = new ModelAndView("home/index");
+		session.removeAttribute(Const.SESSION_USER);
+		session.removeAttribute(Const.SESSION_USER);
+		session.removeAttribute(Const.SESSION_MENUS);
 		return mv;
 	}
 }

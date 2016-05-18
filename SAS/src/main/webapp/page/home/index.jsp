@@ -59,7 +59,7 @@ String resourcePath = basePath+"page/home/";
             <span class="input-group-btn">
               <button type="submit" class="btn btn-sm bg-white btn-icon rounded"><i class="fa fa-search"></i></button>
             </span>
-            <input type="text" class="form-control input-sm no-border rounded" placeholder="大家正在搜：北京房价">
+            <input type="text" class="form-control input-sm no-border rounded" placeholder="大家正在搜：滴滴获得10亿美元苹果投资">
           </div>
         </div>
       </form>
@@ -126,7 +126,7 @@ String resourcePath = basePath+"page/home/";
               </li>
               <li class="divider"></li>
               <li>
-                <a href="modal.lockme.html" data-toggle="ajaxModal" >退出</a>
+                <a href="<%=basePath %>user/logout">退出</a>
               </li>
             </ul>
           </li>

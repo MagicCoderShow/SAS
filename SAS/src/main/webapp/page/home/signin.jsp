@@ -89,8 +89,8 @@ String resourcePath = basePath+"page/home/";
 	  //登录
 	  function login(){
 		  	//检查参数是否完整
-		  	var username=$('#j_username').val(), password=$('#j_password').val();
-		  	if(!username){
+		  	var loginname=$('#j_username').val(), password=$('#j_password').val();
+		  	if(!loginname){
 				alert("请输入用户名");
 				return false;
 			}else if(!password){
@@ -98,8 +98,8 @@ String resourcePath = basePath+"page/home/";
 				return false;
 			}
 		  	//拼接参数串
-		  	var json ="{\"loginname\":\""+$('#j_username').val()+
-			"\",\"password\":\""+$('#j_password').val()+"\"}";
+		  	var json ="{\"loginname\":\""+loginname+
+			"\",\"password\":\""+password+"\"}";
 			//获取公钥
 			$.ajax({
 				type:'post',
