@@ -1,6 +1,5 @@
 package com.xuping.sas.controller;
 
-import java.security.PrivateKey;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.util.HashMap;
@@ -22,7 +21,6 @@ import com.google.common.base.Strings;
 import com.xuping.sas.intercept.Const;
 import com.xuping.sas.model.User;
 import com.xuping.sas.service.UserService;
-import com.xuping.sas.util.Base64SecurityUtil;
 import com.xuping.sas.util.MD5Helper;
 import com.xuping.sas.util.RSAUtils;
 
@@ -62,6 +60,17 @@ public class UserController {
 		map.put("modulus", publicKeyModulus);
 		map.put("exponent", publicKeyExponent);
 		return map;
+	}
+	
+	/**
+	 * 跳转注册
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tosignup",method=RequestMethod.GET)
+	public ModelAndView tosignup(HttpServletRequest request){
+		ModelAndView mv = new ModelAndView("home/signup");
+		return mv;
 	}
 	
 	/**
@@ -142,6 +151,17 @@ public class UserController {
 	}
 	
 	/**
+	 * 跳转登录
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tosignin",method=RequestMethod.GET)
+	public ModelAndView tosignin(HttpServletRequest request){
+		ModelAndView mv = new ModelAndView("home/signin");
+		return mv;
+	}
+	
+	/**
 	 * 登陆
 	 * @param data 用户名，密码，验证码加密串
 	 * @param session
@@ -150,7 +170,7 @@ public class UserController {
 	 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="login",method=RequestMethod.POST)
-	public ModelAndView login(String data,HttpSession session,HttpServletRequest request){
+	public Object login(String data,HttpSession session,HttpServletRequest request){
 		ModelAndView mv = new ModelAndView("home/index");
 		//获取私钥
 		RSAPrivateKey privateKey = (RSAPrivateKey)session.getAttribute("privateKey"); 
@@ -181,6 +201,7 @@ public class UserController {
 					//密码正确
 					user.setLoginPassword(null);
 					session.setAttribute(Const.SESSION_USER,user);
+					return "redirect:/";
 				}else{
 					//用户名密码错误
 					mv.setViewName("home/signin");
@@ -205,11 +226,10 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value="logout",method=RequestMethod.GET)
-	public ModelAndView logout(HttpSession session,HttpServletRequest request){
-		ModelAndView mv = new ModelAndView("home/index");
+	public Object logout(HttpSession session,HttpServletRequest request){
 		session.removeAttribute(Const.SESSION_USER);
 		session.removeAttribute(Const.SESSION_USER);
 		session.removeAttribute(Const.SESSION_MENUS);
-		return mv;
+		return "redirect:/";
 	}
 }

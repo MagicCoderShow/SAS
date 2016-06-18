@@ -14,6 +14,7 @@ String resourcePath = basePath+"page/home/";
   <title>We have Dreams</title>
   <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <link rel="shortcut icon" href="<%=resourcePath %>images/favicon.ico" />
   <link rel="stylesheet" href="<%=resourcePath %>js/jPlayer/jplayer.flat.css" type="text/css" />
   <link rel="stylesheet" href="<%=resourcePath %>css/bootstrap.css" type="text/css" />
   <link rel="stylesheet" href="<%=resourcePath %>css/animate.css" type="text/css" />
@@ -30,7 +31,7 @@ String resourcePath = basePath+"page/home/";
 <body class="bg-info dker">
   <section id="content" class="m-t-lg wrapper-md animated fadeInUp">    
     <div class="container aside-xl">
-      <a class="navbar-brand block" href="<%=resourcePath %>index.jsp">
+      <a class="navbar-brand block" href="<%=basePath %>">
       <img src="<%=resourcePath %>images/logo.png" alt=".">
           <span class="hidden-nav-xs m-l-sm">Dreams</span></a>
       <section class="m-b-lg">
@@ -85,6 +86,15 @@ String resourcePath = basePath+"page/home/";
 				$("#j_username").focus();
 			}
 	  });
+
+	 
+	  //监控回车事件
+	  window.document.onkeydown=function(evt){
+		evt = window.event || evt;
+	    if(evt.keyCode==13){//如果取到的键值是回车
+	         login();
+	     }
+	 }
 	  
 	  //登录
 	  function login(){

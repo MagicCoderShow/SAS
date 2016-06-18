@@ -15,6 +15,7 @@ String resourcePath = basePath+"page/home/";
   <title>We Have Dreams</title>
   <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <link rel="shortcut icon" href="<%=resourcePath %>images/favicon.ico" />
   <link rel="stylesheet" href="<%=resourcePath %>js/jPlayer/jplayer.flat.css" type="text/css" />
   <link rel="stylesheet" href="<%=resourcePath %>css/bootstrap.css" type="text/css" />
   <link rel="stylesheet" href="<%=resourcePath %>css/animate.css" type="text/css" />
@@ -38,7 +39,7 @@ String resourcePath = basePath+"page/home/";
         <a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen,open" data-target="#nav,html">
           <i class="icon-list"></i>
         </a>
-        <a href="<%=resourcePath %>index.jsp" class="navbar-brand text-lt">
+        <a href="<%=basePath %>" class="navbar-brand text-lt">
           <img src="<%=resourcePath %>images/logo.png" alt=".">
           <span class="hidden-nav-xs m-l-sm">Dreams</span>
         </a>
@@ -133,8 +134,8 @@ String resourcePath = basePath+"page/home/";
           </c:if>
           <c:if test="${empty sessionUser}">
           	<div class="index-doc-buttons">
-	          	<a class="btn btn-s-md btn-lg btn-success" href="<%=resourcePath %>signin.jsp">登录</a>
-				<a class="btn btn-s-md btn-lg btn-info" href="<%=resourcePath %>signup.jsp">注册</a>
+	          	<a class="btn btn-s-md btn-lg btn-success" href="<%=basePath %>user/tosignin">登录</a>
+				<a class="btn btn-s-md btn-lg btn-info" href="<%=basePath %>user/tosignup">注册</a>
 			</div>
           </c:if>
         </ul>
