@@ -54,7 +54,7 @@ public class UserController {
         RSAPublicKey publicKey = (RSAPublicKey) rsmap.get("public");    
         RSAPrivateKey privateKey = (RSAPrivateKey) rsmap.get("private");  
         session.setAttribute("privateKey", privateKey);//私钥保存在session中，用于解密  
-        //公钥信息保存在页面，用于加密  
+        //公钥信息保存在页面，用于加密
         String publicKeyExponent = publicKey.getPublicExponent().toString(16);  
         String publicKeyModulus = publicKey.getModulus().toString(16);  
 
@@ -65,7 +65,7 @@ public class UserController {
 	}
 	
 	/**
-	 * 登陆
+	 * 注册
 	 * @param data 用户名，密码，验证码加密串
 	 * @param session
 	 * @param request
